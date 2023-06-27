@@ -7,28 +7,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
-    <context:property-placeholder location="musicPlayer.properties"/>
 
-    <bean id="rockBean"
-          class="ru.maiklkos.spring.JazzMusic">
-    </bean>
-    <bean id="classicalBean"
-          class="ru.maiklkos.spring.JazzMusic">
-    </bean>
-    <bean id="jazzBean"
-          class="ru.maiklkos.spring.JazzMusic">
-    </bean>
-    <bean id="musicPlayer"
-          class="ru.maiklkos.spring.MusicalPlayer">
-        <property name="musicList">
-            <util:list value-type="ru.maiklkos.spring.Music">
-                <ref bean="rockBean"/>
-                <ref bean="classicalBean"/>
-                <ref bean="jazzBean"/>
-            </util:list>
-        </property>
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+    <context:component-scan base-package="ru.maiklkos.spring"/>
 
 </beans>
