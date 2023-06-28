@@ -2,30 +2,48 @@ package ru.maiklkos.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
+@Scope("prototype")
 public class MusicalPlayer {
 
-    @Qualifier("rockMusic")
+    @Value("${musicPlayer.name}")
+    private String name;
+    @Value("${musicPlayer.volume}")
+    private int volume;
+
+    private List<Music> musicList;
+
     @Autowired
-    private Music rockMusic;
-    @Qualifier("classicalMusic")
-    @Autowired
-    private Music classicalMusic;
-    public MusicalPlayer(@Qualifier("rockMusic") Music rockMusic,
-                         @Qualifier("classicalMusic") Music classicalMusic) {
-        this.rockMusic = rockMusic;
-        this.classicalMusic = classicalMusic;
+    public MusicalPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
-    public String playMusic(Genre genre) {
-        if (genre == Genre.CLASSICAL_MUSIC) {
-            return "Playing: " + classicalMusic.getSong();
-        } else if (genre == Genre.ROCK_MUSIC) {
-            return "Playing: " + rockMusic.getSong();
+    public void playMusic() {
+        for (Music music: musicList) {
+            System.out.println("Playing : " + music.getSong());
         }
-        return "Nothing to play";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 
 }

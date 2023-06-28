@@ -2,5 +2,6 @@ package ru.maiklkos.spring;
 
 public enum Genre {
     ROCK_MUSIC,
-    CLASSICAL_MUSIC
+    CLASSICAL_MUSIC,
+    JAZZ_MUSIC
 }
